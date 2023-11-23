@@ -1,41 +1,128 @@
 <?php
 
-
 class Auto
 {
-
-    // Properties
-    private string $name;
-    private string $color = 'rood';
-
     /**
-     * Hier stel ik de naam in
-     *
-     * @param string $name
-     * @return void
+     * @var int
      */
-    function set_name(string $name = 'mini'): string
+    private int $zitplaatsen = 2;
+    /**
+     * @var string
+     */
+    private string $kleur='geel';
+    /**
+     * @var int
+     */
+    private int $passagiers=0;
+    /**
+     * @var int
+     */
+    public int $snelheid = 0;
+
+    public function __construct(int $zitplaatsen = 4, string $kleur='roze' )
     {
-        $this->name = $name;
-        return $this->name;
+        $this->zitplaatsen = $zitplaatsen;
+        $this->kleur = $kleur;
     }
 
     /**
-     * Haal de naam op
-     *
-     * @return string
+     * Voeg een passagier toe en geef terug hoeveel mensen er nu zijn.
+     * @return int
      */
-    function get_name(): string
+    public function nieuwe_passagier(): int
     {
-        return $this->name;
+        if ( $this->passagiers >= $this->zitplaatsen ) {
+            echo 'Er zitten al genoeg passagiers in de auto.';
+            return $this->passagiers;
+        }
+        $this->passagiers++;
+        return $this->passagiers;
+    }
+
+    /**
+     * Pas de snelheid aan
+     *
+     * @param int $speed
+     * @return int
+     */
+    public function versnel(int $speed = 0): int
+    {
+        $this->snelheid += $speed;
+
+        return $this->snelheid;
+    }
+
+    /**
+     * Verminder de snelheid
+     *
+     * @param int $kracht
+     * @return int
+     */
+    public function rem(int $kracht =  0): int
+    {
+        $this->snelheid -= $kracht;
+        return $this->snelheid;
+    }
+
+    /**
+     * Haal de snelheid op
+     *
+     * @return int
+     */
+    public function get_speed(): int
+    {
+        return $this->snelheid;
+    }
+
+    /**
+     * Haal het aantal passagiers op
+     *
+     * @return integer
+     */
+    public function aantal_passagiers() : int {
+        return $this->passagiers;
     }
 }
 
 
-$mijnAuto = new Auto();
-$mijnAuto->set_name('herby');
+/**
+ * Deze class extends de auto class
+ * Daarnaast zorgt hij dat de snelheid minder op loopt.
+ */
+class Volvo extends Auto {
+    /**
+     * Pas de snelheid aan
+     *
+     * @param int $speed
+     * @return int
+     */
+    public function versnel(int $speed = 0): int
+    {
+        $this->snelheid += ( $speed / 2 );
 
-$anderAuto = new Auto();
-$anderAuto->set_name('henk');
+        return $this->snelheid;
+    }
+}
 
-echo $anderAuto->get_name();
+
+
+$bmw = new Auto(2, 'rood');
+$volvo = new Volvo(4, 'rood');
+
+echo 'bmw snelheid=' . $bmw->get_speed() . '<br>';
+$bmw->versnel(30);
+echo 'bmw snelheid=' . $bmw->get_speed() . '<br>';
+
+echo 'volvo snelheid=' . $volvo->get_speed() . '<br>';
+$volvo->versnel(30);
+echo 'volvo snelheid=' . $volvo->get_speed() . '<br>';
+
+
+$bmw->nieuwe_passagier();
+echo 'bmw passagiers=' . $bmw->aantal_passagiers() . '<br>';
+$bmw->nieuwe_passagier();
+$bmw->nieuwe_passagier();
+$bmw->nieuwe_passagier();
+$bmw->nieuwe_passagier();
+$bmw->nieuwe_passagier();
+echo 'bmw passagiers=' . $bmw->aantal_passagiers() . '<br>';
