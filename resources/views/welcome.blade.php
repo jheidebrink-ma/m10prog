@@ -35,7 +35,10 @@
 
     <div class="max-w-7xl mx-auto p-6 lg:p-8 g-blue-50 aspect-square">
         <a href="{{route('about')}}" class="bg-blue hover:bg-green text-white font-bold py-2 px-4 rounded">About</a>
+    </div>
 
+    <div class="max-w-7xl mx-auto p-6 lg:p-8 g-blue-50 aspect-square">
+        <a href="{{route('project.index')}}" class="bg-blue hover:bg-green text-white font-bold py-2 px-4 rounded">Projects</a>
     </div>
 </div>
 </body>
