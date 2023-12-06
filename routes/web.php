@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\AboutController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ProjectController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -30,4 +32,6 @@ Route::middleware('auth')->group(function () {
 
 require __DIR__.'/auth.php';
 
-Route::get('/about', [ \App\Http\Controllers\AboutController::class, 'index'])->name('about');
+Route::get('/about', [ AboutController::class, 'index'])->name('about');
+
+Route::get('/project_item', [ ProjectController::class, 'project' ])->name('project_item');
