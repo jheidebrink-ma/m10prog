@@ -9,18 +9,19 @@ class ProjectController extends Controller
     public function index()
     {
         $projects = Project::all();
-        dump($projects);
+        return view('projects.index', ['projects'=>$projects]);
     }
 
     public function show(Project $project): string
     {
         dump($project);
-        return 'view';
+        return view('projects.show', ['project'=>$project]);
     }
 
     public function project()
     {
-        return 'Dit is een project';
+        $project = new Project();
+        return view('projects.show', ['project'=>$project]);
     }
 
     /**

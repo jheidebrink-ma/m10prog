@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('pages.welcome');
 });
 
 Route::get('/dashboard', function () {
@@ -32,7 +32,7 @@ Route::middleware('auth')->group(function () {
 
 require __DIR__.'/auth.php';
 
-Route::get('/about', [ AboutController::class, 'index'])->name('about');
+Route::get('/about', [ AboutController::class, 'about'])->name('about');
 
 Route::get('/projects', [ ProjectController::class, 'index' ])->name('project.index');
 Route::get('/projects/add', [ ProjectController::class, 'add' ])->name('project.add');
