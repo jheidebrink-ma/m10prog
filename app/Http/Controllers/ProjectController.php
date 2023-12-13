@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Project;
+use Faker\Factory as Faker;
 
 class ProjectController extends Controller
 {
@@ -29,11 +30,13 @@ class ProjectController extends Controller
      */
     public function add()
     {
+        $faker = Faker::create();
+
         // maak een project aan
         $project = new Project();
         // vul de parameters
-        $project->title       = 'Mijn eerste project';
-        $project->description = 'Mijn project omschrijving';
+        $project->title       = $faker->colorName();
+        $project->description = $faker->text();
         $project->active      = true;
         // sla het project op
         $project->save();
