@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('titel');
             $table->text('description')->nullable();
             $table->boolean('active')->default(false);
+            $table->enum('kleur', ['red', 'green']);
             $table->timestamps();
         });
     }
