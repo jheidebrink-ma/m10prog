@@ -13,10 +13,11 @@ return new class extends Migration
     {
         Schema::create('projects', function (Blueprint $table) {
             $table->id();
-            $table->string('titel');
+            $table->string('title');
             $table->text('description')->nullable();
             $table->boolean('active')->default(false);
             $table->enum('kleur', ['red', 'green']);
+            $table->string('image')->nullable();
             $table->timestamps();
         });
     }
