@@ -10,7 +10,12 @@ class ProjectController extends Controller
     public function index()
     {
         $projects = Project::all();
-        return view('projects.index', ['projects'=>$projects]);
+        return view( 'projects.index', 
+            [
+                'projects'=>$projects, 
+                'title'=>'mijn titel', 
+                'side_bar'=>true
+            ]);
     }
 
     public function show(Project $project): string
@@ -30,17 +35,20 @@ class ProjectController extends Controller
      */
     public function add()
     {
+        // hier gebruik ik faker om fake data te genereren.
         $faker = Faker::create();
 
         // maak een project aan
         $project = new Project();
         // vul de parameters
         $project->title       = $faker->colorName();
+        $project->intro       = $faker->text(50);
         $project->description = $faker->text();
         $project->active      = true;
         // sla het project op
         $project->save();
 
+        // ik laat ook nog even zien wat ik gedana heb.
         return 'Project aangemaakt: ' . $project->title;
     }
 }

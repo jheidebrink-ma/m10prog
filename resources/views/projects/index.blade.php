@@ -8,3 +8,10 @@
     @endforeach
 
 @endsection
+
+
+@section('scripts')
+<script>
+    console.log('dit is een index');
+</script>
+@endsection
