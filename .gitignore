@@ -44,3 +44,8 @@ $RECYCLE.BIN/
 .TemporaryItems
 .Trashes
 .VolumeIcon.icns
+bootstrap/cache
+storage/debugbar
+storage/framework/sessions
+storage/logs
+storage/framework/views
