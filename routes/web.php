@@ -36,10 +36,6 @@ require __DIR__ . '/auth.php';
 
 Route::get('/about', [AboutController::class, 'about'])->name('about');
 
-Route::get('/projects', [ProjectController::class, 'index'])->name('project.index');
-Route::get('/projects/add', [ProjectController::class, 'add'])->name('project.add');
-Route::get('/project/{project}', [ProjectController::class, 'show'])->name('project.show');
-
 
 Route::prefix('/dashboard')
      ->middleware(['auth', 'verified'])
@@ -56,3 +52,7 @@ Route::prefix('/dashboard')
              ]
          );
      });
+
+Route::get('/projects', [ProjectController::class, 'index'])->name('project.index');
+Route::get('/projects/add', [ProjectController::class, 'add'])->name('project.add');
+Route::get('/project/{project}', [ProjectController::class, 'show'])->name('project.show');

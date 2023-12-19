@@ -18,9 +18,14 @@ class ProjectController extends Controller
             ]);
     }
 
+    /**
+     * Show a single project
+     *
+     * @param Project $project
+     * @return string
+     */
     public function show(Project $project): string
     {
-        dump($project);
         return view('projects.show', ['project'=>$project]);
     }
 
