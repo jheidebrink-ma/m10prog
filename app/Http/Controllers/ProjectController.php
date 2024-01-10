@@ -10,15 +10,19 @@ class ProjectController extends Controller
     public function index()
     {
         $projects = Project::all();
-        return view( 'projects.index', 
+        return view( 'projects.index',
             [
-                'projects'=>$projects, 
-                'title'=>'mijn titel', 
+                'projects'=>$projects,
+                'title'=>'mijn titel',
                 'side_bar'=>true
             ]);
     }
 
-    public function show(Project $project): string
+    /**
+     * @param Project $project
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Foundation\Application
+     */
+    public function show(Project $project)
     {
         dump($project);
         return view('projects.show', ['project'=>$project]);

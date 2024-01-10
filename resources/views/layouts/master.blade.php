@@ -15,10 +15,10 @@
 <div class="relative sm:flex sm:justify-center sm:items-center min-h-screen bg-dots-darker bg-center bg-gray-100 dark:bg-dots-lighter dark:bg-gray-900 selection:bg-red-500 selection:text-white">
     @include('layouts.partials.header')
 
-    @if( $side_bar ) 
+    @isset( $side_bar )
     Hier komt een side bar
-    @endif
-    
+    @endisset
+
     <!-- Page Content -->
     <main>
         @yield('content')
