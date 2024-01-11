@@ -24,7 +24,6 @@ class ProjectController extends Controller
      */
     public function show(Project $project)
     {
-        dump($project);
         return view('projects.show', ['project'=>$project]);
     }
 
@@ -52,7 +51,7 @@ class ProjectController extends Controller
         // sla het project op
         $project->save();
 
-        // ik laat ook nog even zien wat ik gedana heb.
+        // ik laat ook nog even zien wat ik gedaan heb.
         return 'Project aangemaakt: ' . $project->title;
     }
 }

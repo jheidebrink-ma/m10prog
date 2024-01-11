@@ -1,15 +1,11 @@
 @extends( 'layouts.master' )
 
 @section('content')
-    Hier komen mijn projecten:
-
-    @foreach( $projects as $project)
         <div class="m-2">
         <h2>{{$project->title}}</h2>
-            <a href="{{route('project.show', $project->id)}}">Bekijk</a>
+            ID: {{$project->id}}
+            <em>{{$project->intro}}</em>
         </div>
-
-    @endforeach
 
 @endsection
 
