@@ -1,6 +1,10 @@
 import defaultTheme from 'tailwindcss/defaultTheme';
 import forms from '@tailwindcss/forms';
 
+/**
+ * Usage :
+ * npx tailwindcss -i ./resources/css/app.css -o ./public/dist/app.css --watch
+ */
 /** @type {import('tailwindcss').Config} */
 export default {
     content: [

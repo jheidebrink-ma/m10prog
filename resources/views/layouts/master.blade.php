@@ -7,16 +7,19 @@
 
     <title>{{ config('app.name', 'Ma voorbeeld') }}</title>
 
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.bunny.net">
+    <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet"/>
+
     <!-- Styles -->
     @vite(['resources/css/app.css'])
 </head>
-
-<body class="antialiase>
-<div class="relative sm:flex sm:justify-center sm:items-center min-h-screen bg-dots-darker bg-center bg-gray-100 dark:bg-dots-lighter dark:bg-gray-900 selection:bg-red-500 selection:text-white">
+<body class="font-sans antialiased">
+<div class="min-h-screen bg-gray-100 dark:bg-gray-900">
     @include('layouts.partials.header')
 
     @isset( $side_bar )
-    Hier komt een side bar
+        Hier komt een side bar
     @endisset
 
     <!-- Page Content -->

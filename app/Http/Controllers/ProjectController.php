@@ -19,10 +19,12 @@ class ProjectController extends Controller
     }
 
     /**
+     * Show a single project
+     *
      * @param Project $project
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Foundation\Application
+     * @return string
      */
-    public function show(Project $project)
+    public function show(Project $project): string
     {
         return view('projects.show', ['project'=>$project]);
     }

@@ -27,7 +27,6 @@ services:
             - mailpit
             - selenium
             - mariadb
-            - mysql
     redis:
         image: 'redis:alpine'
         ports:
@@ -81,8 +80,10 @@ services:
         image: phpmyadmin/phpmyadmin
         environment:
             PMA_HOST: mariadb
-            PMA_USER: root
-            PMA_PASSWORD: '${DB_PASSWORD}'
+            PMA_USER: sail
+            PMA_PASSWORD: password
+            #PMA_USER: root
+            #PMA_PASSWORD: '${DB_PASSWORD}'
         ports:
             - '1088:80'
         networks:
