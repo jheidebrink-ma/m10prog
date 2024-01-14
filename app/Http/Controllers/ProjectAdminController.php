@@ -30,19 +30,11 @@ class ProjectAdminController extends Controller
      */
     public function store(Request $request)
     {
-        $valid_data = $request->validate(
-            [
-                'title'       => 'required|unique:projects|max:255',
-                'intro'       => 'required',
-                'description' => 'required',
-                'active'      => 'nullable',
-            ]
-        );
-
-        $project              = new Project($valid_data);
+        $valid_data = $this->validator($request);
+        $project    = new Project($valid_data);
         $project->save();
 
-        return redirect( route('project.show', $project->id ) );
+        return redirect(route('project.show', $project->id));
     }
 
     /**
@@ -50,7 +42,7 @@ class ProjectAdminController extends Controller
      */
     public function show(Project $project)
     {
-        return view('projects.show', ['project'=>$project]);
+        return view('projects.show', ['project' => $project]);
     }
 
     /**
@@ -61,7 +53,7 @@ class ProjectAdminController extends Controller
      */
     public function edit(Project $project)
     {
-        return view('dashboard.projects.edit', ['project'=>$project]);
+        return view('dashboard.projects.edit', ['project' => $project]);
     }
 
     /**
@@ -73,19 +65,11 @@ class ProjectAdminController extends Controller
      */
     public function update(Request $request, Project $project)
     {
-        $valid_data = $request->validate(
-            [
-                'title'       => 'required|unique:projects|max:255',
-                'intro'       => 'required',
-                'description' => 'required',
-                'active'      => 'nullable',
-            ]
-        );
-
+        $valid_data = $this->validator($request);
         $project->update($valid_data);
         $project->save();
 
-        return redirect( route('project.show', $project->id ) );
+        return redirect(route('project.show', $project->id));
     }
 
     /**
@@ -94,5 +78,21 @@ class ProjectAdminController extends Controller
     public function destroy(Project $project)
     {
         //
+    }
+
+    /**
+     * @param Request $request
+     * @return array
+     */
+    protected function validator(Request $request)
+    {
+        return $request->validate(
+            [
+                'title'       => 'required|unique:projects|max:255',
+                'intro'       => 'required',
+                'description' => 'required',
+                'active'      => 'nullable',
+            ]
+        );
     }
 }
