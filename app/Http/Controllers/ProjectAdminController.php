@@ -50,23 +50,42 @@ class ProjectAdminController extends Controller
      */
     public function show(Project $project)
     {
-        //
+        return view('projects.show', ['project'=>$project]);
     }
 
     /**
      * Show the form for editing the specified resource.
+     *
+     * @param Project $project
+     * @return \Illuminate\Contracts\View\View|\Illuminate\Foundation\Application
      */
     public function edit(Project $project)
     {
-        //
+        return view('dashboard.projects.edit', ['project'=>$project]);
     }
 
     /**
      * Update the specified resource in storage.
+     *
+     * @param Request $request
+     * @param Project $project
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function update(Request $request, Project $project)
     {
-        //
+        $valid_data = $request->validate(
+            [
+                'title'       => 'required|unique:projects|max:255',
+                'intro'       => 'required',
+                'description' => 'required',
+                'active'      => 'nullable',
+            ]
+        );
+
+        $project->update($valid_data);
+        $project->save();
+
+        return redirect( route('project.show', $project->id ) );
     }
 
     /**

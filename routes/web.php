@@ -48,7 +48,7 @@ Route::prefix('/dashboard')
 
          Route::resources(
              [
-                 'project' => ProjectAdminController::class,
+                 'projects' => ProjectAdminController::class,
              ]
          );
      });
