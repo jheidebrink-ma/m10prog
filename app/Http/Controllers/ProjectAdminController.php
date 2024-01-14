@@ -77,7 +77,9 @@ class ProjectAdminController extends Controller
      */
     public function destroy(Project $project)
     {
-        //
+        $project->delete();
+
+        return redirect(route('projects.index'))->with('alert', 'Het item '.$project->title.' is nu weg.');
     }
 
     /**
