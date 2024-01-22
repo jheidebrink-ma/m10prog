@@ -30,9 +30,16 @@ class ProjectAdminController extends Controller
      */
     public function store(Request $request)
     {
-        $valid_data = $this->validator($request);
+        $valid_data = $this->validator($request, new Project());
         $project    = new Project($valid_data);
         $project->save();
+
+        $image = $request->file('image');
+        if ( ! empty($image) ) {
+            $path = $request->file('image')?->store('public/project');
+            $project->image = $path;
+            $project->save();
+        }
 
         return redirect(route('project.show', $project->id));
     }
@@ -65,9 +72,15 @@ class ProjectAdminController extends Controller
      */
     public function update(Request $request, Project $project)
     {
-        $valid_data = $this->validator($request);
+        $valid_data = $this->validator($request, $project);
         $project->update($valid_data);
-        $project->save();
+
+        $image = $request->file('image');
+        if ( ! empty($image) ) {
+            $path = $request->file('image')?->store('public/project');
+            $project->image = $path;
+            $project->save();
+        }
 
         return redirect(route('project.show', $project->id));
     }
@@ -86,11 +99,11 @@ class ProjectAdminController extends Controller
      * @param Request $request
      * @return array
      */
-    protected function validator(Request $request)
+    protected function validator(Request $request, Project $project)
     {
         return $request->validate(
             [
-                'title'       => 'required|unique:projects|max:255',
+                'title'       => 'required|max:255|unique:projects,id,'.$project->id,
                 'intro'       => 'required',
                 'description' => 'required',
                 'active'      => 'nullable',

@@ -8,7 +8,7 @@
     </div>
 @endif
 
-<form action="{{$route}}" method="post">
+<form action="{{$route}}" method="post" enctype="multipart/form-data">
     @csrf
     {{ method_field($method) }}
 
@@ -51,6 +51,14 @@
             <input @if(!old('active', $project->active)) checked @endif id="active-2" type="radio" value="0" name="active"
                    class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
             <label for="active-2" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Verborgen</label>
+        </div>
+    </div>
+
+    <div class="col-span-full">
+        <label for="image"
+               class="block text-sm font-medium leading-6 text-gray-900">Afbeelding</label>
+        <div class="mt-2">
+            <input type="file" name="image">
         </div>
     </div>
 
