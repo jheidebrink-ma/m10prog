@@ -41,7 +41,7 @@ class ProjectAdminController extends Controller
             $project->save();
         }
 
-        return redirect(route('project.show', $project->id));
+        return redirect(route('dashboard.projects.index'));
     }
 
     /**
