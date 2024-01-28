@@ -53,6 +53,8 @@ Route::prefix('/dashboard')
          );
      });
 
+Route::get('/project/{project}/download', [ProjectController::class, 'download'])->name('project.download');
+Route::get('/project/download', [ProjectController::class, 'downloadAll'])->name('project.download_all');
 Route::get('/projects', [ProjectController::class, 'index'])->name('project.index');
 Route::get('/projects/add', [ProjectController::class, 'add'])->name('project.add');
 Route::get('/project/{project}', [ProjectController::class, 'show'])->name('project.show');

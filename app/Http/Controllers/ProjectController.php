@@ -4,18 +4,21 @@ namespace App\Http\Controllers;
 
 use App\Models\Project;
 use Faker\Factory as Faker;
+use Illuminate\Support\Facades\Response;
 
 class ProjectController extends Controller
 {
     public function index()
     {
         $projects = Project::all();
-        return view( 'projects.index',
+        return view(
+            'projects.index',
             [
-                'projects'=>$projects,
-                'title'=>'mijn titel',
-                'side_bar'=>true
-            ]);
+                'projects' => $projects,
+                'title'    => 'mijn titel',
+                'side_bar' => true,
+            ]
+        );
     }
 
     /**
@@ -26,13 +29,13 @@ class ProjectController extends Controller
      */
     public function show(Project $project): string
     {
-        return view('projects.show', ['project'=>$project]);
+        return view('projects.show', ['project' => $project]);
     }
 
     public function project()
     {
         $project = new Project();
-        return view('projects.show', ['project'=>$project]);
+        return view('projects.show', ['project' => $project]);
     }
 
     /**
@@ -55,5 +58,64 @@ class ProjectController extends Controller
 
         // ik laat ook nog even zien wat ik gedaan heb.
         return 'Project aangemaakt: ' . $project->title;
+    }
+
+    /**
+     * @param Project $project
+     * @return \Illuminate\Http\Response
+     */
+    public function download(Project $project)
+    {
+        $csvFileName = 'projects' . $project->title . '.csv';
+        $headers     = [
+            'Content-Type'        => 'text/csv',
+            'Content-Disposition' => 'attachment; filename="' . $csvFileName . '"',
+        ];
+
+        $handle = fopen('php://output', 'w');
+        fputcsv($handle, ['id', 'title', 'description']);
+        fputcsv(
+            $handle,
+            [
+                $project->id,
+                $project->title,
+                $project->description,
+            ]
+        );
+
+        fclose($handle);
+
+        return Response::make('', 200, $headers);
+    }
+
+    /**
+     * @return \Illuminate\Http\Response
+     */
+    public function downloadAll()
+    {
+        $projects    = Project::all();
+        $csvFileName = 'projects.csv';
+        $headers     = [
+            'Content-Type'        => 'text/csv',
+            'Content-Disposition' => 'attachment; filename="' . $csvFileName . '"',
+        ];
+
+        $handle = fopen('php://output', 'w');
+        fputcsv($handle, ['id', 'title', 'description']);
+
+        foreach ($projects as $project) {
+            fputcsv(
+                $handle,
+                [
+                    $project->id,
+                    $project->title,
+                    $project->description,
+                ]
+            );
+        }
+
+        fclose($handle);
+
+        return Response::make('', 200, $headers);
     }
 }

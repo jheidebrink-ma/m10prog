@@ -2,6 +2,11 @@
 
 @section('content')
     Hier komen mijn projecten:
+    <a href="{{route('project.download_all')}}"
+       class="bg-green focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
+        Download All
+    </a>
+
     <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
         @foreach( $projects as $project)
             <div
@@ -18,6 +23,10 @@
                 <a href="{{route('project.show', $project)}}"
                    class="bg-green focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
                     Bekijk
+                </a>
+                <a href="{{route('project.download', $project)}}"
+                   class="bg-green focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
+                    Download
                 </a>
             </div>
         @endforeach
