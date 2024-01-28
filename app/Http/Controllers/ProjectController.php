@@ -89,7 +89,7 @@ class ProjectController extends Controller
     }
 
     /**
-     * @return \Illuminate\Http\Response
+     * @return \Symfony\Component\HttpFoundation\StreamedResponse
      */
     public function downloadAll()
     {
@@ -100,22 +100,14 @@ class ProjectController extends Controller
             'Content-Disposition' => 'attachment; filename="' . $csvFileName . '"',
         ];
 
-        $handle = fopen('php://output', 'w');
-        fputcsv($handle, ['id', 'title', 'description']);
+        $callback = static function() use($projects) {
+            echo 'id,title,description';
+            foreach ($projects as $project) {
+                echo "$project->id,$project->title,$project->description";
+                echo "\n\r";
+            }
+        };
 
-        foreach ($projects as $project) {
-            fputcsv(
-                $handle,
-                [
-                    $project->id,
-                    $project->title,
-                    $project->description,
-                ]
-            );
-        }
-
-        fclose($handle);
-
-        return Response::make('', 200, $headers);
+        return Response::stream( $callback, 200, $headers);
     }
 }
