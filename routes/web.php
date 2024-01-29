@@ -4,6 +4,7 @@ use App\Http\Controllers\AboutController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\ProjectAdminController;
+use App\Http\Controllers\ProjectDownloadController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -53,8 +54,8 @@ Route::prefix('/dashboard')
          );
      });
 
-Route::get('/project/{project}/download', [ProjectController::class, 'download'])->name('project.download');
-Route::get('/project/download', [ProjectController::class, 'downloadAll'])->name('project.download_all');
+Route::get('/project/{project}/download', [ProjectDownloadController::class, 'download'])->name('project.download');
+Route::get('/project/download', [ProjectDownloadController::class, 'downloadAll'])->name('project.download_all');
 Route::get('/projects', [ProjectController::class, 'index'])->name('project.index');
 Route::get('/projects/add', [ProjectController::class, 'add'])->name('project.add');
 Route::get('/project/{project}', [ProjectController::class, 'show'])->name('project.show');

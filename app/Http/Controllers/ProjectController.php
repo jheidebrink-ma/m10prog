@@ -87,27 +87,4 @@ class ProjectController extends Controller
 
         return Response::make('', 200, $headers);
     }
-
-    /**
-     * @return \Symfony\Component\HttpFoundation\StreamedResponse
-     */
-    public function downloadAll()
-    {
-        $projects    = Project::all();
-        $csvFileName = 'projects.csv';
-        $headers     = [
-            'Content-Type'        => 'text/csv',
-            'Content-Disposition' => 'attachment; filename="' . $csvFileName . '"',
-        ];
-
-        $callback = static function() use($projects) {
-            echo 'id,title,description';
-            foreach ($projects as $project) {
-                echo "$project->id,$project->title,$project->description";
-                echo "\n\r";
-            }
-        };
-
-        return Response::stream( $callback, 200, $headers);
-    }
 }
