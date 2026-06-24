@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Project;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ProjectAdminController extends Controller
 {
@@ -91,6 +92,9 @@ class ProjectAdminController extends Controller
     public function destroy(Project $project)
     {
         $project->delete();
+        if ( $project->image ) {
+            Storage::delete($project->image);
+        }
 
         return redirect(route('projects.index'))->with('alert', 'Het item '.$project->title.' is nu weg.');
     }
